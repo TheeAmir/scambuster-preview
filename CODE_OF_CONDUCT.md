@@ -62,7 +62,6 @@ This Code of Conduct applies within all project spaces, including:
 
 Instances of abusive, harassing, or otherwise unacceptable behavior may be reported to:
 
-- **Email**: conduct@scambuster.io
 - **Alternative**: Laurent Giovannoni via GitHub message
 - **Subject line**: "Code of Conduct Report"
 
