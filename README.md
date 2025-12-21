@@ -1,6 +1,6 @@
 # ScamBuster
 
-**A Research Laboratory for Automated Scambaiting & Threat Intelligence**
+**A Defensive Engagement & Threat Intelligence Research Laboratory (Email-first)**
 
 ![Status](https://img.shields.io/badge/status-private_preview-blue)
 ![Stack](https://img.shields.io/badge/stack-PHP%208.3%20|%20Symfony%207%20|%20PostgreSQL%20|%20LLM-green)
@@ -9,21 +9,29 @@
 
 > **Last updated**: 2025-12-17 | **Data period**: November-December 2025
 
+ScamBuster turns inbound scam emails into **actionable threat intelligence** through **controlled, policy-driven engagement**.
+
+- **Purpose:** defensive security, fraud prevention, and applied research — *not* offensive use.
+- **Focus:** extract IOCs, understand campaigns, measure what works, and export intelligence (STIX/MISP-ready).
+- **Approach:** safety-gated, cost-aware, fully auditable workflows (docs-only public repo).
+
+> This repository is a **public preview** (documentation only). Operational assets remain private to prevent misuse.
+
 ---
 
-## The Problem: Billions Lost Annually to Email Scams
+## The Problem: Email Scams Are High-Volume — and Mostly "Invisible" to Defenders
 
-Every day, billions of scam emails are sent worldwide. Traditional defenses simply block and forget—providing **zero intelligence** about attacker infrastructure, financial channels, or campaign attribution.
+Email scams operate at massive scale. Most security programs are forced into a **block-and-forget** posture: the message is removed, but the attacker infrastructure, financial rails, and campaign signals remain largely unobserved.
 
-> **Industry estimates**: ~3.4B daily scam emails (Statista 2024), $12.5B annual losses (FBI IC3 2023). See [Problem Statement](docs/01_problem_statement.md) for sourced figures.
+> Industry estimates and sourced figures are documented in [Problem Statement](docs/01_problem_statement.md).
 
-**The result:**
-- Scammers pivot immediately to new targets
-- No deterrent effect (scamming remains low-risk, high-reward)
-- Security teams lack visibility into emerging threats
-- The same infrastructure continues operating for months
+**This creates a structural gap:**
+- Little to no attribution across messages and campaigns
+- Limited visibility into evolving TTPs and infrastructure reuse
+- Slow feedback loops (what works, what doesn't, and why)
+- Missed opportunities to generate intelligence from real-world interaction
 
-> **What if every scam email could become a source of threat intelligence?**
+> **What if every scam email could be converted into measurable threat intelligence — safely?**
 
 ---
 
@@ -89,23 +97,17 @@ Instead of discarding scam emails, ScamBuster creates an **observatory** that an
 > **IOC precision (100%)** = no false positives in audited sample (precision = TP / (TP + FP), N=107 messages).
 > Sample-based validation details are documented in [Evaluation Methodology](docs/05_evaluation_methodology.md).
 
-### Validation Dataset
+### Validation Summary
 
-| Metric | Value |
-|--------|-------|
-| **Synthetic conversations** | 2,221 |
-| **Statistical significance** | p < 0.001 (Welch's t-test) |
-| **Convergence coefficient** | CV = 0.1703 |
-| **Effect size** | Cohen's d = 0.37 |
+Adaptive strategy selection was validated on 2,221 synthetic conversations with statistically significant results (p < 0.001). Full methodology and statistical details are available in [Evaluation Methodology](docs/05_evaluation_methodology.md).
 
 ### Key Discoveries
 
-**Persona Performance Varies 5.5× by Scam Type**
+**Strategy Performance Varies Significantly by Scam Type**
 
 The adaptive system discovered that:
-- `elderly_person` persona achieves **48.7h max engagement** (vs 0.3h median)
-- Optimal persona differs significantly across scam types
-- Human intuition about "best" strategies is often wrong
+- Optimal strategy differs significantly across scam categories
+- Human intuition about "best" approaches is often wrong
 - Data-driven selection outperforms random assignment
 
 **Campaign Attribution**
@@ -131,19 +133,22 @@ Five specialized AI agents work in concert:
 | **Validator** | Ensure safety & quality | 95% approval rate |
 | **Orchestrator** | Coordinate & optimize costs | <€0.0002/message |
 
-### Adaptive Learning (Research Innovation)
+### Adaptive Strategy Selection (Applied Research)
 
-**Novel application of contextual multi-armed bandits to scambaiting.** To our knowledge, this is among the earliest documented implementations combining RL-based persona selection with automated honeypot engagement in a production-oriented, measurable setup.
+ScamBuster does not rely on a single fixed "best" conversational approach. Instead, it uses **adaptive strategy selection** to learn—per scam category—which safe persona/response patterns maximize **intelligence yield** under strict constraints.
 
-| Aspect | Implementation |
-|--------|----------------|
-| **Algorithm** | ε-greedy (V1) → Thompson Sampling (V2) |
-| **Context** | 1 bandit per scam type |
-| **Arms** | 13 personas × 13 scam types = 169 combinations |
-| **Reward** | 40% duration + 25% IOCs + 25% high-value IOCs + 10% completion |
-| **Convergence** | <100 sessions per scam type |
+**Key ideas:**
+- **Context-aware:** strategies are selected per scam type (e.g., BEC, lottery, romance, refund…).
+- **Measurable outcomes:** the system optimizes for *defensive* signals (e.g., indicators revealed, validated artifacts, sustained interaction) while controlling cost and safety.
+- **Safety-first:** every response is gated by validation rules and policy checks before being sent.
+- **Continuous improvement:** performance is monitored over time, enabling data-driven iteration rather than intuition.
 
-The system **learns automatically** which conversational strategies work best, without human intervention.
+| Aspect | Summary |
+|--------|---------|
+| Approach | Contextual bandit / adaptive experimentation |
+| Context | One policy per scam category (extensible) |
+| Strategy space | Persona & response patterns (kept private to prevent misuse) |
+| Objectives | Intelligence yield, safety compliance, and cost efficiency |
 
 ---
 
@@ -202,7 +207,7 @@ The system **learns automatically** which conversational strategies work best, w
 
 To prevent misuse by adversaries, this repository contains **documentation only**:
 
-- No scambaiting prompts or persona definitions
+- No engagement prompts or persona definitions
 - No automation workflows or scripts
 - No operational playbooks or tactics
 - No real conversation data or scammer identifiers
@@ -216,7 +221,7 @@ To prevent misuse by adversaries, this repository contains **documentation only*
 | Phase | Status | Timeline |
 |-------|--------|----------|
 | **Phase 1**: Multi-agent LLM architecture | ✅ Complete | Oct-Nov 2025 |
-| **Phase 2**: Adaptive scambaiting (ε-greedy) | ✅ Complete | Nov-Dec 2025 |
+| **Phase 2**: Adaptive engagement (ε-greedy) | ✅ Complete | Nov-Dec 2025 |
 | **Phase 3**: Thompson Sampling V2 | ✅ Feature-complete (rollout in progress) | Dec 2025 |
 | **Phase 4**: Scale & Dashboards | 🔄 In Progress | Dec 2025 |
 | **Phase 5**: A/B Testing | 📅 Planned | Jan 2026 |
@@ -242,6 +247,11 @@ To prevent misuse by adversaries, this repository contains **documentation only*
 
 > **Eligibility**: Access is granted for defensive security, research, or fraud prevention purposes only. No access for offensive use, scam operations, or purposes that conflict with the project's ethical guidelines.
 
+**Operational boundaries:**
+- **Inbound-only engagement** — we respond to scam emails already received, never initiate contact
+- **No impersonation** — no pretending to be real organizations, brands, or individuals (personas are synthetic role patterns, non-identifying)
+- **No unauthorized access** — no hack-back, no exploitation of scammer infrastructure
+
 ### Pilot Program
 
 **Evaluate in your environment:**
@@ -260,8 +270,11 @@ To prevent misuse by adversaries, this repository contains **documentation only*
 
 | | |
 |---|---|
-| **Name** | Laurent Giovannoni |
+| **Project lead** | Laurent Giovannoni |
 | **LinkedIn** | [linkedin.com/in/giovannonilaurent](https://linkedin.com/in/giovannonilaurent) |
+| **Context** | E-MSc Cybersecurity — Master's Thesis |
+| **Demo request** | Open a [GitHub Issue](../../issues) (private requests welcome) |
+| **Security** | See [SECURITY.md](SECURITY.md) for responsible disclosure |
 
 ---
 
@@ -284,7 +297,7 @@ To prevent misuse by adversaries, this repository contains **documentation only*
 
 1. **Methodological**: Reproducible protocol for adaptive honeypot evaluation
 2. **Technical**: Multi-agent LLM with double validation (95% approval vs 60-70% baseline)
-3. **Scientific**: Empirically validated adaptive scambaiting (p < 0.001, N=2,221)
+3. **Scientific**: Empirically validated adaptive engagement (p < 0.001, N=2,221)
 4. **Practical**: Demonstrated efficiency at pilot scale (€0.52 for 2,213 IOCs)
 
 ### Citation
@@ -292,7 +305,7 @@ To prevent misuse by adversaries, this repository contains **documentation only*
 ```bibtex
 @master{giovannoni2025scambuster,
   author = {Giovannoni, Laurent},
-  title = {ScamBuster: Adaptive Scambaiting via Multi-Armed Bandits
+  title = {ScamBuster: Adaptive Controlled Engagement via Multi-Armed Bandits
            for Automated Threat Intelligence Extraction},
   school = {E-MSc Cybersecurity},
   year = {2025}
